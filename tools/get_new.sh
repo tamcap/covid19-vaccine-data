@@ -21,7 +21,7 @@ LTC_DATA_RUNID=$(cat /tmp/current-ltc.json | jq ".runid")
 # existing run id list
 DATA_CURRENT_RUNS=$(jq ".runid" ./data/*${FILE_SUFFIX}.json)
 LTC_DATA_CURRENT_RUNS=$(jq ".runid" ./data/*${LTC_FILE_SUFFIX}.json)
-echo $LTC_DATA_CURRENT_RUNS
+# echo $LTC_DATA_CURRENT_RUNS
 
 if [[ ${DATA_CURRENT_RUNS[*]} =~ $DATA_RUNID ]]
 then
