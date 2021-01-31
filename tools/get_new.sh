@@ -23,7 +23,7 @@ DATA_CURRENT_RUNS=$(jq ".runid" ./data/*${FILE_SUFFIX}.json)
 LTC_DATA_CURRENT_RUNS=$(jq ".runid" ./data/*${LTC_FILE_SUFFIX}.json)
 # echo $LTC_DATA_CURRENT_RUNS
 
-if [[ ${DATA_CURRENT_RUNS[*]} =~ $DATA_RUNID ]]
+if [ ${DATA_CURRENT_RUNS[*]} =~ $DATA_RUNID ] && [ ${DATA_CURRENT_RUNS[*]} =! $DATA_DATE ]
 then
     echo "Run $DATA_RUNID ($DATA_DATE) already exists, discarding"
     rm -f /tmp/current.json
