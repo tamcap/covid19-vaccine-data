@@ -20,10 +20,11 @@ LTC_DATA_RUNID=$(cat /tmp/current-ltc.json | jq ".runid")
 
 # existing run id list
 DATA_CURRENT_RUNS=$(jq ".runid" ./data/*${FILE_SUFFIX}.json)
+DATA_CURRENT_DATES=$(jq ".vaccination_data[0].Date" ./data/*${FILE_SUFFIX}.json | sed  's/[-"]//g')
 LTC_DATA_CURRENT_RUNS=$(jq ".runid" ./data/*${LTC_FILE_SUFFIX}.json)
 # echo $LTC_DATA_CURRENT_RUNS
 
-if [ ${DATA_CURRENT_RUNS[*]} =~ $DATA_RUNID ] && [ ${DATA_CURRENT_RUNS[*]} =! $DATA_DATE ]
+if [[ ${DATA_CURRENT_RUNS[*]} =~ $DATA_RUNID && ${DATA_CURRENT_DATES[*]} =~ $DATA_DATE ]]
 then
     echo "Run $DATA_RUNID ($DATA_DATE) already exists, discarding"
     rm -f /tmp/current.json
